@@ -1,6 +1,6 @@
 const express=require("express");
 const userRouter=express.Router();
-
+const {authenticator}=require("../Middlewares/authenticator")
 const {userModel}=require("../Models/user.model");
 const {blacklistModel}=require("../Models/blockusermodel");
 
@@ -36,6 +36,7 @@ userRouter.post("/login",async(req,res)=>{
         const isuserpresent=await userModel.findOne({email});
         if(!isuserpresent){
             return res.send({msg:"user not present in db , please register first"});
+            console.log("sddfdf")
         }
         const correctpassword= await bcrypt.compareSync(password,isuserpresent.password);
         if(!correctpassword){
@@ -50,7 +51,7 @@ userRouter.post("/login",async(req,res)=>{
     } 
 })
 
-userRouter.get("/logout",async(req,res)=>{
+userRouter.get("/logout",authenticator,async(req,res)=>{
     try {
         const token=req.headers.authorization.split(" ")[1];
         // const blacklist= await blacklistModel.find()
@@ -62,7 +63,7 @@ userRouter.get("/logout",async(req,res)=>{
     }
 })
 
-userRouter.get("/getnewtoken",async(req,res)=>{
+userRouter.get("/getnewtoken",authenticator,async(req,res)=>{
     const refreshToken=req.headers.authorization.split(" ")[1];
     if(!refreshToken) res.send({msg:"plz login again"})
 
@@ -75,6 +76,7 @@ userRouter.get("/getnewtoken",async(req,res)=>{
         }
     })
 })
+
 
 module.exports={
     userRouter
