@@ -1,0 +1,22 @@
+
+
+/* Users table */
+
+.status.delete {
+    padding: 6px 6px;
+    background: red;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.status.active {
+    padding: 6px 6px;
+    background: green;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
