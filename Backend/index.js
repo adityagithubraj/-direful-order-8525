@@ -6,6 +6,8 @@ const {connection}= require("./Configs/db");
 const {authenticator}=require("./Middlewares/authenticator");
 const {userRouter}=require("./Routes/user.route")
 
+
+
 app.use(express.json());
 
 app.use("/user",userRouter)
