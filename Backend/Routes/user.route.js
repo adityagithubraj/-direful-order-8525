@@ -1,6 +1,6 @@
 const express=require("express");
 const userRouter=express.Router();
-
+const {authenticator}=require("../Middlewares/authenticator")
 const {userModel}=require("../Models/user.model");
 const {blacklistModel}=require("../Models/blockusermodel");
 
@@ -14,6 +14,8 @@ userRouter.get("/",(req,res)=>{
 userRouter.post("/signup",async(req,res)=>{
     const {name,email,password,role}=req.body;
     try {
+       let isuserpresent = await userModel.findOne({email})
+       if(!isuserpresent){
         bcrypt.hash(password,5,async(err,hash)=>{
             if(err){
                 res.send({msg:"something went wrong",err:err})
@@ -23,6 +25,10 @@ userRouter.post("/signup",async(req,res)=>{
                 res.send({msg:"new user has been registered"})
             }
         })
+        }
+        else{
+            res.send({msg:"User Alearday exist"})
+       }
 
 
     } catch (error) {
@@ -31,9 +37,11 @@ userRouter.post("/signup",async(req,res)=>{
 })
 
 userRouter.post("/login",async(req,res)=>{
+    
     try {
         const {email,password}=req.body;
         const isuserpresent=await userModel.findOne({email});
+ 
         if(!isuserpresent){
             return res.send({msg:"user not present in db , please register first"});
         }
@@ -50,7 +58,7 @@ userRouter.post("/login",async(req,res)=>{
     } 
 })
 
-userRouter.get("/logout",async(req,res)=>{
+userRouter.get("/logout",authenticator,async(req,res)=>{
     try {
         const token=req.headers.authorization.split(" ")[1];
         // const blacklist= await blacklistModel.find()
@@ -62,7 +70,7 @@ userRouter.get("/logout",async(req,res)=>{
     }
 })
 
-userRouter.get("/getnewtoken",async(req,res)=>{
+userRouter.get("/getnewtoken",authenticator,async(req,res)=>{
     const refreshToken=req.headers.authorization.split(" ")[1];
     if(!refreshToken) res.send({msg:"plz login again"})
 
@@ -75,6 +83,7 @@ userRouter.get("/getnewtoken",async(req,res)=>{
         }
     })
 })
+
 
 module.exports={
     userRouter
