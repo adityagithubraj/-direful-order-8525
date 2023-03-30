@@ -14,6 +14,8 @@ userRouter.get("/",(req,res)=>{
 userRouter.post("/signup",async(req,res)=>{
     const {name,email,password,role}=req.body;
     try {
+       let isuserpresent = await userModel.findOne({email})
+       if(!isuserpresent){
         bcrypt.hash(password,5,async(err,hash)=>{
             if(err){
                 res.send({msg:"something went wrong",err:err})
@@ -23,6 +25,10 @@ userRouter.post("/signup",async(req,res)=>{
                 res.send({msg:"new user has been registered"})
             }
         })
+        }
+        else{
+            res.send({msg:"User Alearday exist"})
+       }
 
 
     } catch (error) {
