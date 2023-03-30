@@ -38,7 +38,8 @@ const logIn=()=>{
   fetch("http://localhost:4500/user/login",{
       method:"POST",
       headers:{
-          "Content-type":"application/json"
+          "Content-type":"application/json",
+         
       },
       body:JSON.stringify(payload)
       
@@ -46,6 +47,7 @@ const logIn=()=>{
   .then(res=>res.json())
   .then(res=>{
       console.log(res)
+     alert("user login successfully")
       localStorage.setItem("token",res.token)
   })
   .catch(err=>console.log(err))

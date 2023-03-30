@@ -14,6 +14,8 @@ userRouter.get("/",(req,res)=>{
 userRouter.post("/signup",async(req,res)=>{
     const {name,email,password,role}=req.body;
     try {
+       let isuserpresent = await userModel.findOne({email})
+       if(!isuserpresent){
         bcrypt.hash(password,5,async(err,hash)=>{
             if(err){
                 res.send({msg:"something went wrong",err:err})
@@ -23,6 +25,10 @@ userRouter.post("/signup",async(req,res)=>{
                 res.send({msg:"new user has been registered"})
             }
         })
+        }
+        else{
+            res.send({msg:"User Alearday exist"})
+       }
 
 
     } catch (error) {
@@ -31,17 +37,17 @@ userRouter.post("/signup",async(req,res)=>{
 })
 
 userRouter.post("/login",async(req,res)=>{
+    
     try {
         const {email,password}=req.body;
         const isuserpresent=await userModel.findOne({email});
+ 
         if(!isuserpresent){
             return res.send({msg:"user not present in db , please register first"});
-            
         }
         const correctpassword= await bcrypt.compareSync(password,isuserpresent.password);
         if(!correctpassword){
             return res.send({msg:"invalid credentials"})
-            
         }
 
         const token= await jwt.sign({email,userid:isuserpresent._id,role:isuserpresent.role},process.env.token_key,{expiresIn:"30m"})
