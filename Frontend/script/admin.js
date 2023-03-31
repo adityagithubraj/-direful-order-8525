@@ -25,7 +25,15 @@ toggle.onclick = function () {
 // logout Functionality..........................................................
 
 function SignOut(){
-    localStorage.clear()
-    window.location="index.html"
+
+
+  var result=confirm("Do you really want to Sign Out!")
+  if(result==true){
+      window.location="./userside/index.html"
+  }
+    
   
 }
+
+
+

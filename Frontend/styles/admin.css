@@ -249,8 +249,8 @@ body {
     width: 100%;
     padding: 20px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 30px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 0px;
 }
 
 .cardBox .card {
@@ -375,31 +375,9 @@ body {
     text-align: center;
 }
 
-.status.delivered {
-    padding: 2px 4px;
-    background: #8de02c;
-    color: var(--white);
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-}
 
-.status.pending {
-    padding: 2px 4px;
-    background: #e9b10a;
-    color: var(--white);
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.status.inProgress {
-    padding: 2px 4px;
-    background: #1795ce;
-    color: var(--white);
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
+.user-graph{
+    width: 100%;
 }
 
 
@@ -424,7 +402,7 @@ body {
     }
 
     .cardBox {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 
