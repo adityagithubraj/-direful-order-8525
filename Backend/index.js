@@ -11,10 +11,13 @@ const {qrRouter}=require("./Routes/qr.route")
 
 
 
-const {userRouter}=require("./Routes/user.route")
+
 const {oauthRouter}=require("./Routes/oauthrouter")
+const {fboauthRouter}=require("./Routes/fb-oauth-router")
+
 const {adminRoute}=require("./Routes/adminRoutes")
 const {logger}=require("./Middlewares/logger")
+
 const cors = require('cors')
 
 
@@ -41,12 +44,13 @@ app.get("/",(req,res)=>{
 })
 app.use("/user",userRouter)
 app.use("/oauth",oauthRouter)
+
+app.use("/fboauth",fboauthRouter)
+
 app.use(authenticator);
 
 app.use(qrRouter)
 app.use("/admin",adminRoute)
-
-
 
 
 
