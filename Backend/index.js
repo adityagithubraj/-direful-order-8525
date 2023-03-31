@@ -1,8 +1,15 @@
 const express=require("express");
+const bodyParser = require('body-parser');
 
+const app=express();
 require("dotenv").config();
 
 const {connection}= require("./Configs/db");
+const {authenticator}=require("./Middlewares/authenticator");
+const {userRouter}=require("./Routes/user.route");
+const {qrRouter}=require("./Routes/qr.route")
+
+
 
 const {userRouter}=require("./Routes/user.route")
 const {oauthRouter}=require("./Routes/oauthrouter")
@@ -14,8 +21,16 @@ const cors = require('cors')
 
 const app=express();
 
+app.set('view engine','ejs');
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 app.use(express.json());
+
+
+
+
+
 
 app.use(cors())
 
@@ -26,7 +41,13 @@ app.get("/",(req,res)=>{
 })
 app.use("/user",userRouter)
 app.use("/oauth",oauthRouter)
+app.use(authenticator);
+
+app.use(qrRouter)
 app.use("/admin",adminRoute)
+
+
+
 
 
 
