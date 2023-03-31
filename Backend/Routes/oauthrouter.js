@@ -9,7 +9,7 @@ oauthRouter.get("/",(req,res)=>{
 })
 
 oauthRouter.get("/oauthlogin",(req,res)=>{
-    res.sendFile("C:/Users/HP/Documents/GitHub/-direful-order-8525/frontend/login and sigup/index.html")
+    res.sendFile("C:/Users/HP/Documents/GitHub/-direful-order-8525/Frontend/userside/index.html")
     
 })
 
