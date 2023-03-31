@@ -1,6 +1,6 @@
-const url = "https://localhost8080/usersList"
+const url = "http://localhost:4500/admin"
 
-// displayUsers(`${url}/users`)
+displayUsers(`${url}/userlist`)
 
 function displayUsers(url) {
     fetch(url)
@@ -25,14 +25,37 @@ function userCard(el) {
 }
 
 async function deleteUser(el) {
-    const id=el.id
-    console.log(id)
-    await fetch(`${url}/users/${el.id}`,{
-        method:"DELETE"
+    const id = el.id
+    window.confirm("The User will be permanently Deleted")
+    await fetch(`${url}/deleteUser/${el.id}`, {
+        method: "DELETE"
     })
-        displayUsers(`${url}/users`)
-    
+    deleteAlert()
+    displayUsers(`${url}/userlist`)
+
 }
+
+
+
+// ...........................................Delete Alert Functionality..................................................................
+function deleteAlert() {
+    var child = document.getElementById('clonemother');
+    var clone = child.cloneNode(true);
+    // console.log(clone);
+    var node = document.getElementById("toasts").appendChild(clone);
+    console.log(node.childNodes);
+    setTimeout(function() {
+      if(node) {
+        node.childNodes[1].childNodes[5].childNodes[1].innerHTML = "User has been deleted from the Database"
+      }
+    },1000);
+    setTimeout(function() {
+      if(node) {
+        node.style.animation = "toast .5s ease-out forwards";
+        setTimeout(() => {node.remove();} ,500);
+      }
+    },2000);
+  }
 
 
 

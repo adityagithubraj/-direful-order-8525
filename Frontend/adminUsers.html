@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beautify-Admin</title>
+    <title>QRcode-Chimp-Admin</title>
     <link rel="stylesheet" href="./styles/admin.css">
     <script src="https://kit.fontawesome.com/84b484b925.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles/admin.user.css">
@@ -23,7 +23,7 @@
                         <span class="icon">
                             <!-- <ion-icon name="logo-apple"></ion-icon> -->
                             <img class="logo" src="../Images/qrlogo-monk.png" alt="">
-                        </span>                        
+                        </span>
                     </a>
                 </li>
 
@@ -78,7 +78,7 @@
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
-                        <span class="title" >Sign Out</span>
+                        <span class="title">Sign Out</span>
                     </a>
                 </li>
             </ul>
@@ -92,16 +92,16 @@
                 </div>
 
                 <div class="logoMain">
-                    <img  src="../Images/qrlogo.png" alt="">
+                    <img src="../Images/qrlogo.png" alt="">
                 </div>
             </div>
-    
+
 
             <!-- ================ Order Details List ================= -->
             <div class="details">
                 <div class="recentOrders">
-                    <div class="cardHeader" >
-                        <h2 >Users</h2>
+                    <div class="cardHeader">
+                        <h2>Users</h2>
                     </div>
 
                     <table>
@@ -115,16 +115,40 @@
                         </thead>
 
                         <tbody id="userData">
-                            
+
                             <tr>
-                                
-                            </tr> 
+
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+    <div class="toast-area" id="toasts">
+        <div style="display: none">
+            <div class="toast" id="clonemother">
+                <div class="toast-content">
+                    <div class="before"></div>
+                    <div class="deleteicon">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </div>
+                    <div class="text">
+                        <p>Deleting User......</p>
+                    </div>
+                    <div onclick="deletethis()" class="close">
+                        &#x00D7
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 
 
 </body>

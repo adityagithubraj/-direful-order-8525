@@ -1,5 +1,4 @@
 const express=require("express");
-<<<<<<< HEAD
 const bodyParser = require('body-parser');
 
 const app=express();
@@ -9,15 +8,13 @@ const {connection}= require("./Configs/db");
 const {authenticator}=require("./Middlewares/authenticator");
 const {userRouter}=require("./Routes/user.route");
 const {qrRouter}=require("./Routes/qr.route")
-=======
 
-require("dotenv").config();
 
-const {connection}= require("./Configs/db");
->>>>>>> 9cdd39253badfa48256e6378119cf7506f98277f
 
 const {userRouter}=require("./Routes/user.route")
 const {oauthRouter}=require("./Routes/oauthrouter")
+const {adminRoute}=require("./Routes/adminRoutes")
+const {logger}=require("./Middlewares/logger")
 const cors = require('cors')
 
 
@@ -30,16 +27,26 @@ app.use(bodyParser.json());
 
 app.use(express.json());
 
-<<<<<<< HEAD
-app.use("/user",userRouter);
-app.use(qrRouter)
 
-app.use(authenticator);
-=======
+
+
+
+
 app.use(cors())
+
+app.use(logger)
+
+app.get("/",(req,res)=>{
+    res.send("Server Home Page")
+})
 app.use("/user",userRouter)
 app.use("/oauth",oauthRouter)
->>>>>>> 9cdd39253badfa48256e6378119cf7506f98277f
+app.use(authenticator);
+
+app.use(qrRouter)
+app.use("/admin",adminRoute)
+
+
 
 
 
