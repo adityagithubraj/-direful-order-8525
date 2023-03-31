@@ -6,6 +6,7 @@ const {connection}= require("./Configs/db");
 
 const {userRouter}=require("./Routes/user.route")
 const {oauthRouter}=require("./Routes/oauthrouter")
+const {fboauthRouter}=require("./Routes/fb-oauth-router")
 const cors = require('cors')
 
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(cors())
 app.use("/user",userRouter)
 app.use("/oauth",oauthRouter)
+app.use("/fboauth",fboauthRouter)
 
 
 
