@@ -138,6 +138,15 @@ form.sign-in-form {
   display: flex;
   justify-content: center;
 }
+.social-media-2{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 3px 20px 0 10px;
+  background: #f0ecec;
+  border-radius: 8px;
+  
+}
 
 .social-icon {
   height: 46px;
