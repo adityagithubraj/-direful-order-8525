@@ -1,50 +1,73 @@
-<html>
-  <head>
-    <title>Html-Qrcode Demo</title>
-  <body>
-    <div id="qr-reader" style="width:500px"></div>
-    <div id="qr-reader-results"></div>
-  </body>
-  <script src="library.js"></script>
-  <script>
-    function docReady(fn) {
-    // see if DOM is already available
-    if (document.readyState === "complete" || document.readyState === "interactive") {
-        // call on next available tick
-        setTimeout(fn, 1);
-    } else {
-        document.addEventListener("DOMContentLoaded", fn);
-    }
-}
- 
-docReady(function() {
-    var resultContainer = document.getElementById('qr-reader-results');
-    var lastResult, countResults = 0;
-    
-    var html5QrcodeScanner = new Html5QrcodeScanner(
-        "qr-reader", { fps: 10, qrbox: 250 });
-    
-    function onScanSuccess(decodedText, decodedResult) {
-        if (decodedText !== lastResult) {
-            ++countResults;
-            lastResult = decodedText;
-            console.log(`Scan result = ${decodedText}`, decodedResult);
-            resultContainer.innerHTML += `<div>[${countResults}] - ${decodedText}</div>`;
-            
-            // Optional: To close the QR code scannign after the result is found
-            html5QrcodeScanner.clear();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="qrlogo2.webp" />
+    <title>qr code scanner</title>
+
+<script src="/Backend/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+</head>
+<body>
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-    }
+        #reader {
+            width: 600px;
+        }
+        #result {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+    </style>
     
-    // Optional callback for error, can be ignored.
-    function onScanError(qrCodeError) {
-        // This callback would be called in case of qr code scan error or setup error.
-        // You can avoid this callback completely, as it can be very verbose in nature.
-    }
+    <main>
+        <div id="reader"></div>
+        <div id="result"></div>
+    </main>
+        
     
-    html5QrcodeScanner.render(onScanSuccess, onScanError);
-});
-  </script>
-  </head>
+    <script>
+    
+        const scanner = new Html5QrcodeScanner('reader', { 
+           
+            qrbox: {
+                width: 250,
+                height: 250,
+            },  
+            fps: 20, 
+        });
+    
+    
+        scanner.render(success, error);
+        // Starts scanner
+    
+        function success(result) {
+    
+            document.getElementById('result').innerHTML = `
+            <h2>Success!</h2>
+            <p><a href="${result}">${result}</a></p>
+            `;
+        
+    
+            scanner.clear();
+            // Clears scanning instance
+    
+            document.getElementById('reader').remove();
+            
+        
+        }
+    
+        function error(err) {
+            console.error(err);
+            
+        }
+    
+    </script>
+
+</body>
 </html>
- 
