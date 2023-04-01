@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR-Bot landing page</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <script src="https://kit.fontawesome.com/d68d319f71.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/5a8be6b3e6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div id="navbar">
+
+        <div id="nav-left">
+            <div id="logo">
+                <img width="40%" src="./Images/qrlogo.png" alt="">
+            </div>
+            <div id="menu">
+                <a href="./qrurl.html">
+                    <p>Create URL Qr-Code <i class="fa-solid fa-chevron-down"></i></p>
+                </a>
+                <!-- <p>Quick Actions <i class="fa-solid fa-chevron-down"></i></p>
+                <p>Template <i class="fa-solid fa-chevron-down"></i></p>
+                <p>Mobile App <i class="fa-solid fa-chevron-down"></i></p> -->
+                <a href="./qrtxt.html">
+                    <p>Create Text Code<i class="fa-solid fa-chevron-down"></i></p>
+                </a>
+                <a href="./scaner.html">
+                    <p>Scan Qr-Code<i class="fa-solid fa-chevron-down"></i></p>
+                </a>
+
+            </div>
+        </div>
+
+        <div id="nav-right">
+            <a href="./signIn&signUp.html"><button id="signin">Log In</button></a>
+            <a href="./signIn&signUp.html"><button id="signup">Sign Up</button></a>
+        </div>
+        <div id="logout" class="log">
+            <p id="name"></p>
+            <button id="logout_btn">Logout</button>
+        </div>
+    </div>
+
+    <div id="div1">
+        <div id="d1l">
+            <h1>Create custom QR codes for free with our generator.</h1>
+            <p>Simply input your information and download the
+                high-resolution code for easy sharing and tracking</p>
+            <a href="./qrurl.html"><button id="qr_gen">Create your QR code now</button>
+            </a>
+        </div>
+        <div id="d1r">
+            <img src="https://paytmblogcdn.paytm.com/wp-content/uploads/2022/01/3_What-is-a-QR-code-Know-everything-about-it-800x500.jpg"
+                alt="">
+        </div>
+    </div>
+    <div id="div2">
+        <h2>How to make a QR code.</h2>
+        <div id="process">
+            <div>
+                <span><i class="fa-solid fa-upload"></i></span>
+                <span class="s1">
+                    <h3>1. Select.</h3>
+                    <p>Choose a URL and paste it into the generator.</p>
+                </span>
+            </div>
+            <div>
+                <span><i class="fa-solid fa-qrcode"></i></span>
+                <span class="s1">
+                    <h3>2. Generate.</h3>
+                    <p>Create your QR code and customize the style and color.</p>
+            </div>
+            <div>
+                <span><i class="fa-solid fa-download"></i></span>
+                <span class="s1">
+                    <h3>3. Download.</h3>
+                    <p>Select your desired file type and download your QR code</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="div4">
+        <h2>Ready to use the free QR code maker?</h2>
+        <button>Create your QR code now</button>
+    </div>
+
+    <div id="div5">
+        <h2>Discover more for photography</h2>
+    </div>
+
+    <div id="footer">
+        <div id="ftop">
+            <div>
+                <h2>Adobe Express</h2>
+                <p><a href="">Create</a></p>
+                <p><a href="">Quick Actions</a></p>
+                <p><a href="">Templates</a></p>
+                <p><a href="">Features</a></p>
+                <p><a href="">Discover</a></p>
+                <p><a href="">Compare Plans</a></p>
+            </div>
+            <div>
+                <h2>Inspiration and Learning</h2>
+                <p><a href="">Adobe Express</a></p>
+                <p><a href="">Tutorials</a></p>
+                <p><a href="">Education</a></p>
+                <p><a href="">Android</a></p>
+                <p><a href="">iOS</a></p>
+                <p><a href="">Page</a></p>
+            </div>
+            <div>
+                <h2>Help</h2>
+                <p><a href="">Support</a></p>
+                <p><a href="">Suggest</a></p>
+                <p><a href="">Affiliates</a></p>
+                <p><a href="">Ambassadors</a></p>
+                <p><a href="">Guidelines</a></p>
+                <p><a href="">Contact</a></p>
+            </div>
+            <div>
+                <h2>Adobe</h2>
+                <p><a href="">About</a></p>
+                <p><a href="">Careers</a></p>
+                <p><a href="">Newsroom</a></p>
+                <p><a href="">Events</a></p>
+                <p><a href="">Integrity</a></p>
+                <p><a href="">Supply Chain</a></p>
+            </div>
+        </div>
+        <div id="fbot">
+            <hr>
+            <div>
+                <p> <b>Featured downloads</b></p>
+                <p><i class="fa-solid fa-font"></i> QR Code Reader</p>
+                <p><i class="fa-brands fa-square-font-awesome-stroke"></i> Photoshop</p>
+                <p><i class="fa-solid fa-bezier-curve"></i> Illustrator</p>
+            </div>
+            <hr>
+            <p> &nbsp;&nbsp;&nbsp;Copyright © 2023 Adobe. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+<script>
+    console.log("Script Working")
+    fetch("http://localhost:4500/getdetails")
+        .then((res) => { res.json() })
+        .then((data) => { console.log(data) })
+</script>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>qr code scanner</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./Images/qrlogo2.webp" />
+
+<script src="/Frontend/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+</head>
+<body>
+    <div style=" margin-left: 45%;margin-right: 30%;width: 10%;height: 10%;">
+        <img style="width:100% ;height: 100%;" src="./Images/qrlogo2.webp" alt="">
+    </div>
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #reader {
+            width: 600px;
+        }
+        #result {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+    </style>
+    
+    <main>
+        <div id="reader"></div>
+        <div id="result"></div>
+    </main>
+        
+    
+    <script>
+    
+        const scanner = new Html5QrcodeScanner('reader', { 
+           
+            qrbox: {
+                width: 250,
+                height: 250,
+            },  
+            fps: 20, 
+        });
+    
+    
+        scanner.render(success, error);
+        // Starts scanner
+    
+        function success(result) {
+    
+            document.getElementById('result').innerHTML = `
+            <h2>Success!</h2>
+            <p><a href="${result}">${result}</a></p>
+            `;
+        
+    
+            scanner.clear();
+            // Clears scanning instance
+    
+            document.getElementById('reader').remove();
+            
+        
+        }
+    
+        function error(err) {
+            console.error(err);
+            
+        }
+    
+    </script>
+
+</body>
+</html>

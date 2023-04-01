@@ -1,6 +1,7 @@
 const express=require("express")
 require("dotenv").config()
 const {passport2}=require("../Configs/fb-oauth")
+const path=require("path")
 
 const fboauthRouter=express.Router();
 
@@ -9,7 +10,7 @@ fboauthRouter.get("/",(req,res)=>{
     
 })
 fboauthRouter.get("/fboauthlogin",(req,res)=>{
-    res.sendFile("C:/Users/HP/Documents/GitHub/-direful-order-8525/Frontend/userside/index.html")
+    res.sendFile(path.join(__dirname,"Frontend/index.html"))
     
 })
 
