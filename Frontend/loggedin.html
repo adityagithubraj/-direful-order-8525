@@ -10,6 +10,46 @@
     <script src="https://kit.fontawesome.com/d68d319f71.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/5a8be6b3e6.js" crossorigin="anonymous"></script>
+
+    <style>
+        #login {
+            background-color: white;
+            padding: 5px 10px 5px 10px;
+            border-radius: 20px;
+            font-size: 17px;
+            color: #0cc0df;
+            border: 1px solid #0cc0df;
+            font-weight: 500;
+            left: 0;
+            top: 25px;
+            cursor: pointer;
+        }
+
+        .logout {
+            background-color: white;
+            padding: 5px 10px 5px 10px;
+            border-radius: 20px;
+            font-size: 17px;
+            color: #0cc0df;
+            border: 1px solid #0cc0df;
+            font-weight: 500;
+            position: absolute;
+            left: 0;
+            top: 25px;
+            display: none;
+        }
+
+        .logoutactive {
+            display: block;
+        }
+
+
+        .logout:hover {
+            background-color: red;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,29 +58,30 @@
 
         <div id="nav-left">
             <div id="logo">
-                <img width="15%" src="./Images/qrlogo2.webp" alt="">
-                <h3>QRcode <br> <span style="color:black ;margin-left: 20px; font-size: large;" >chimp</span></h3>
+                <img width="40%" src="./Images/qrlogo.png" alt="">
             </div>
             <div id="menu">
-                <a onclick="loginAlert()">
-                    <p>Create URL Qr-Code </p>
+                <a href="./qrurl.html">
+                    <p>Create URL Qr-Code <i class="fa-solid fa-chevron-down"></i></p>
                 </a>
                 <!-- <p>Quick Actions <i class="fa-solid fa-chevron-down"></i></p>
                 <p>Template <i class="fa-solid fa-chevron-down"></i></p>
                 <p>Mobile App <i class="fa-solid fa-chevron-down"></i></p> -->
-                <a onclick="loginAlert()">
-                    <p>Create Text Code</p>
+                <a href="./qrtxt.html">
+                    <p>Create Text Code<i class="fa-solid fa-chevron-down"></i></p>
                 </a>
-                <a onclick="loginAlert()">
-                    <p>Scan Qr-Code</p>
+                <a href="./scaner.html">
+                    <p>Scan Qr-Code<i class="fa-solid fa-chevron-down"></i></p>
                 </a>
 
             </div>
         </div>
 
         <div id="nav-right">
-            <a href="./signIn&signUp.html"><button id="signin">Log In</button></a>
-            <a href="./signIn&signUp.html"><button id="signup">Sign Up</button></a>
+            <a style="position: relative;"><button id="login">Atir Khan</button><button class="logout">Log
+                    Out</button></a>
+
+            <!-- <a href="./signIn&signUp.html"><button id="signup">Sign Up</button></a> -->
         </div>
         <div id="logout" class="log">
             <p id="name"></p>
@@ -148,11 +189,22 @@
     </div>
 </body>
 <script>
-    console.log("Script Working")
-    
-    function loginAlert(){
-        alert("Please Login First")
-    }
+
+    const loggedin = document.getElementById("login")
+    const logout = document.querySelector(".logout")
+
+    loggedin.addEventListener("click", () => {
+        console.log("clicking")
+
+
+        console.log(logout)
+        logout.classList.toggle("logoutactive")
+    })
+
+
+    logout.addEventListener("click",()=>{
+        window.location="https://glowing-gumption-f9f45a.netlify.app/"
+    })
 </script>
 
 </html>

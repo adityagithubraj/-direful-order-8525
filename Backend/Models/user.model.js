@@ -13,6 +13,14 @@ const userScema = mongoose.Schema({
     versionKey:false
 })
 
-const userModel = mongoose.model("user",userScema)
+const logSchema=mongoose.Schema({
+    level:String,
+    message:String
+    
+})
 
-module.exports = {userModel}
+
+const userModel = mongoose.model("user",userScema)
+const logsModel=mongoose.model("server_logs",logSchema)
+
+module.exports = {userModel,logsModel}

@@ -1,6 +1,6 @@
 const express=require("express")
 const {authenticator}=require("../Middlewares/authenticator")
-const {userModel}=require("../Models/user.model")
+const {userModel,logsModel}=require("../Models/user.model")
 
 const  adminRoute=express.Router()
 
@@ -22,6 +22,19 @@ adminRoute.delete("/deleteUser/:id",async(req,res)=>{
         res.status(200).json({msg:"User Deleted Successfully"})
     } catch (error) {
         
+    }
+})
+
+
+// //....................................Getting Logs.........................................................
+
+adminRoute.get("/logs",async(req,res)=>{
+    try {
+        const logs=await logsModel.aggregate([{$sort:{"timestamp":-1}},{$limit:30}])
+        res.json({logs})
+    } catch (error) {
+        console.log(error)
+        res.json({msg:error})
     }
 })
 

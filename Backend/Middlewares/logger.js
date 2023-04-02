@@ -6,9 +6,9 @@ require("dotenv").config()
 
 const logger = expressWinston.logger({
     transports: [
-        new winston.transports.Console({
-            level: "info"
-        }),
+        // new winston.transports.Console({
+        //     level: "info"
+        // }),
         new winston.transports.MongoDB({
             level: "info",
             db: process.env.MongoURL,
@@ -19,9 +19,11 @@ const logger = expressWinston.logger({
             format: winston.format.combine(
                 winston.format.timestamp(),
                 winston.format.json()
-            )
+            ),
+            metaKey:"meta"
         })
-    ]
+    ],
+    meta:true
 })
 
 

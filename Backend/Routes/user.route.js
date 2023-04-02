@@ -11,8 +11,12 @@ require("dotenv").config();
 userRouter.get("/",(req,res)=>{
     res.send("default route")
 })
+
 userRouter.post("/signup",async(req,res)=>{
-    const {name,email,password,role}=req.body;
+    console.log(req.body)
+    
+    const {username,email,password,role}=req.body;
+    
     try {
        let isuserpresent = await userModel.findOne({email})
        if(!isuserpresent){
@@ -20,7 +24,8 @@ userRouter.post("/signup",async(req,res)=>{
             if(err){
                 res.send({msg:"something went wrong",err:err})
             }else{
-                const newuser=new userModel({name,email,password:hash,role})
+                const newuser=new userModel({name:username,email,password:hash,role})
+                console.log(newuser)
                 await newuser.save();
                 res.send({msg:"new user has been registered"})
             }
@@ -52,9 +57,15 @@ userRouter.post("/login",async(req,res)=>{
 
         const token= await jwt.sign({email,userid:isuserpresent._id,role:isuserpresent.role},process.env.token_key,{expiresIn:"30m"})
         const refreshtoken= await jwt.sign({email,userid:isuserpresent._id,role:isuserpresent.role},process.env.ref_token_key,{expiresIn:"1h"})
-        res.send({msg:"Login successful",token,refreshtoken})
+        console.log(isuserpresent)
+        if(isuserpresent.role=="admin"){
+            res.json({msg:"Login successful",token,refreshtoken,role:"admin"})
+            return
+        }
+        res.json({msg:"Login successful",token,refreshtoken})
     } catch (error) {
-        res.send({msg:"something went wrong",error})    
+        console.log(error)
+        res.json({msg:"something went wrong",error})    
     } 
 })
 

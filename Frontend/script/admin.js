@@ -1,4 +1,5 @@
-// add hovered class to selected list item
+
+// .......................................add hovered class to selected list item...................................
 let list = document.querySelectorAll(".navigation li");
 
 function activeLink() {
@@ -21,18 +22,15 @@ toggle.onclick = function () {
 };
 
 
-
-// logout Functionality..........................................................
+// ...........................logout Functionality..........................................................
 
 function SignOut(){
-
 
   var result=confirm("Do you really want to Sign Out!")
   if(result==true){
       window.location="./index.html"
   }
     
-  
 }
 
 

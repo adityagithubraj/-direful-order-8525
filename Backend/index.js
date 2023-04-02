@@ -35,7 +35,7 @@ app.use(express.json());
 
 app.use(cors())
 app.use(cookieParser());
-// app.use(logger)
+app.use(logger)
 
 
 // .........................................Route Setup.........................................
@@ -52,7 +52,7 @@ app.get("/getdetails",(req,res)=>{
     res.json({user:details})
 })
 
-app.use(authenticator);
+// app.use(authenticator);
 
 app.use(qrRouter)
 app.use("/admin",adminRoute)

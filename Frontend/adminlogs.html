@@ -8,8 +8,57 @@
     <title>QRcode-Chimp-Admin</title>
     <link rel="stylesheet" href="./styles/admin.css">
     <script src="https://kit.fontawesome.com/84b484b925.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles/admin.user.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        .status200,
+        .status201,
+        .status202,
+        .status203 {
+            padding: 6px 6px;
+            background: green;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status300,
+        .status301,
+        .status302,
+        .status303 {
+            padding: 6px 6px;
+            background: blue;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status400,
+        .status401,
+        .status402,
+        .status403 {
+            padding: 6px 6px;
+            background: yellow;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .status500,
+        .status501,
+        .status502,
+        .status503 {
+            padding: 6px 6px;
+            background: red;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    </style>
 
 </head>
 
@@ -19,7 +68,7 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="admin.html">
                         <span class="icon">
                             <!-- <ion-icon name="logo-apple"></ion-icon> -->
                             <img class="logo" src="./Images/qrlogo-monk.png" alt="">
@@ -46,7 +95,7 @@
                 </li>
 
                 <li>
-                    <a href="adminlogs.html">
+                    <a href="./adminlogs.html">
                         <span class="icon">
                             <i class='bx bx-file' style="font-size: 1.5rem;"></i>
                             <!-- <ion-icon name="pricetags-outline"></ion-icon> -->
@@ -94,27 +143,46 @@
                 <div class="logoMain">
                     <img src="./Images/qrlogo.png" alt="">
                 </div>
+
+            </div>
+
+            <!-- ======================= Cards ================== -->
+            <div class="cardBox">
+
+
+                <div class="card">
+                    <div>
+                        <div class="numbers" id="logsCount">Logs</div>
+                        <div class="cardName"></div>
+                    </div>
+
+                    <div class="iconBx">
+                        <i class='bx bx-file' style="font-size: 3.5rem;"></i>
+                    </div>
+                </div>
+
+
             </div>
 
 
-            <!-- ================ Order Details List ================= -->
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Users</h2>
+                        <h2>Logs</h2>
                     </div>
 
                     <table>
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Email</td>
-                                <td>Status</td>
-                                <td>Delete</td>
+                                <td>Level</td>
+                                <td>Message</td>
+                                <td>Status Code</td>
+                                <td>Response Time</td>
+                                <td>TimeStamp</td>
                             </tr>
                         </thead>
 
-                        <tbody id="userData">
+                        <tbody id="logsData">
 
                             <tr>
 
@@ -123,30 +191,11 @@
                     </table>
                 </div>
             </div>
+
+
+
+
         </div>
-    </div>
-
-
-
-
-    <div class="toast-area" id="toasts">
-        <div style="display: none">
-            <div class="toast" id="clonemother">
-                <div class="toast-content">
-                    <div class="before"></div>
-                    <div class="deleteicon">
-                        <i class="fa-regular fa-trash-can"></i>
-                    </div>
-                    <div class="text">
-                        <p>Deleting User......</p>
-                    </div>
-                    <div onclick="deletethis()" class="close">
-                        &#x00D7
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
 
@@ -156,6 +205,35 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="./script/admin.js"></script>
-<script src="./script/admin.user.js"></script>
+
+<script>
+    const url = "http://localhost:4500/admin"
+
+    displayLogs(`${url}/logs`)
+
+    function displayLogs(url) {
+        fetch(url)
+            .then(res => res.json())
+            .then((data) => {
+                data = data.logs
+                data = data.map(el => {
+                    return logCard(el)
+                })
+                document.getElementById("logsData").innerHTML = data.join(" ")
+            })
+            .catch(err => console.log(err))
+    }
+
+    function logCard(el) {
+        return `<tr>
+            <td>${el.level}</td>
+            <td>${el.message}</td>
+            <td><span class="status${el.meta.res.statusCode}">${el.meta.res.statusCode}</span></td>
+            <td ><span class="status time" >${el.meta.responseTime}</span ></td>
+            <td>${el.timestamp}</td>
+        </tr>`
+    }
+
+</script>
 
 </html>

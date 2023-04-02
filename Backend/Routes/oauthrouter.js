@@ -1,7 +1,7 @@
 const express = require("express")
 const path = require("path")
 const cookieParser = require('cookie-parser')
- 
+
 
 
 require("dotenv").config()
@@ -13,19 +13,18 @@ oauthRouter.get("/", (req, res) => {
 
 })
 
-oauthRouter.get("/oauthlogin", (req, res) => {
+// oauthRouter.get("/oauthlogin", (req, res) => {
 
-  res.writeHead(301, { Location: "https://nimble-sunflower-9c171f.netlify.app/" });
-  res.end();
-  // res.status(201).json({ msg: "google login successfull" })
-  // const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-  // const REDIRECT_URI = 'http://localhost:3000/index.html';
+//   console.log("inOauthLogin")
 
-  // const AUTH_URL = `https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=profile%20email&response_type=code`;
+//   res.cookie("user", `${req.user.email}`)
+//   console.log(req.user.cookie)
 
-  // window.location.href = AUTH_URL;
+//   res.writeHead(301, { Location: "https://glowing-gumption-f9f45a.netlify.app/" });
+//   res.end();
 
-})
+
+// })
 
 oauthRouter.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', "email"] }));
@@ -36,12 +35,9 @@ oauthRouter.get('/auth/google/callback',
     // Successful authentication, redirect home.
     console.log(req.user)
 
-    res.cookie("user", `${req.user.email}`)
-    console.log(req.cookie)
-
-    res.writeHead(301, { Location: "https://nimble-sunflower-9c171f.netlify.app/" });
+    res.writeHead(301, { Location: "https://glowing-gumption-f9f45a.netlify.app/" });
     res.end();
-    // res.redirect('/oauth/oauthlogin');
+    // res.redirect('http://localhost:4500/oauth/oauthlogin');
   });
 
 
