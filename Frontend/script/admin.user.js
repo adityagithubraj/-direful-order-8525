@@ -1,4 +1,4 @@
-const url = "http://localhost:4500/admin"
+const url = "https://backend-deploy-km65.onrender.com/admin"
 
 displayUsers(`${url}/userlist`)
 

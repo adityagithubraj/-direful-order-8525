@@ -26,7 +26,7 @@ const SignUp = () => {
 
   
   console.log(payload)
-  fetch("http://localhost:4500/user/signup", {
+  fetch("https://backend-deploy-km65.onrender.com/user/signup", {
     method: "POST",
     headers: {
       "Content-type": "application/json"
@@ -44,7 +44,7 @@ const logIn = () => {
     password: document.getElementById("password").value
   }
 
-  fetch("http://localhost:4500/user/login", {
+  fetch("https://backend-deploy-km65.onrender.com/user/login", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -76,7 +76,7 @@ const logIn = () => {
 const google = document.getElementById("google")
 
 google.addEventListener("click", () => {
-  fetch("http://localhost:4500/oauth/auth/google")
+  fetch("https://backend-deploy-km65.onrender.com/oauth/auth/google")
     .then(async (res) => { return { status: res.status, res: await res.json() } })
     .then((data) => {
       if (data.status == 201) {
