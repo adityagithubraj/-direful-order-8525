@@ -35,7 +35,7 @@ oauthRouter.get('/auth/google/callback',
     // Successful authentication, redirect home.
     console.log(req.user)
 
-    res.writeHead(301, { Location: "https://glowing-gumption-f9f45a.netlify.app/" });
+    res.writeHead(301, { Location: "https://qr-code-chimp.netlify.app/loggedin" });
     res.end();
     // res.redirect('http://localhost:4500/oauth/oauthlogin');
   });
