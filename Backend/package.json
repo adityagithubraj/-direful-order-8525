@@ -28,7 +28,6 @@
     "passport-google-oauth20": "^2.0.0",
     "qrcode": "^1.5.1",
     "redis": "^4.6.5",
-    "socket.io": "^4.6.1",
     "uuid": "^9.0.0",
     "winston": "^3.8.2",
     "winston-mongodb": "^5.1.1"
