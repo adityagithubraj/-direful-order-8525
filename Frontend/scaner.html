@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="./Images/qrlogo2.webp" />
 
-<script src="/Frontend/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+    <script src="/Frontend/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
 </head>
+
 <body>
     <div id="navbar">
 
@@ -38,8 +40,8 @@
         </div>
 
         <div id="nav-right">
-            <a href="./signIn&signUp.html"><button id="signin">Log In</button></a>
-            <a href="./signIn&signUp.html"><button id="signup">Sign Up</button></a>
+            <a style="position: relative;"><button id="login">User</button><button class="logout">Log
+                    Out</button></a>
         </div>
         <div id="logout" class="log">
             <p id="name"></p>
@@ -55,58 +57,115 @@
             justify-content: center;
             align-items: center;
         }
+
         #reader {
             width: 600px;
         }
+
         #result {
             text-align: center;
             font-size: 1.5rem;
         }
+
+        #login {
+            background-color: white;
+            padding: 5px 10px 5px 10px;
+            border-radius: 20px;
+            font-size: 17px;
+            color: #0cc0df;
+            border: 1px solid #0cc0df;
+            font-weight: 500;
+            left: 0;
+            top: 25px;
+            cursor: pointer;
+        }
+
+        .logout {
+            background-color: white;
+            padding: 5px 10px 5px 10px;
+            border-radius: 20px;
+            font-size: 17px;
+            color: #0cc0df;
+            border: 1px solid #0cc0df;
+            font-weight: 500;
+            position: absolute;
+            left: 0;
+            top: 25px;
+            display: none;
+        }
+
+        .logoutactive {
+            display: block;
+        }
+
+
+        .logout:hover {
+            background-color: red;
+            color: white;
+            cursor: pointer;
+        }
     </style>
-    
+
     <main>
         <div id="reader"></div>
         <div id="result"></div>
     </main>
-        
-    
+
+
     <script>
-    
-        const scanner = new Html5QrcodeScanner('reader', { 
-           
+
+        const scanner = new Html5QrcodeScanner('reader', {
+
             qrbox: {
                 width: 250,
                 height: 250,
-            },  
-            fps: 20, 
+            },
+            fps: 20,
         });
-    
-    
+
+
         scanner.render(success, error);
         // Starts scanner
-    
+
         function success(result) {
-    
+
             document.getElementById('result').innerHTML = `
             <h2>Success!</h2>
             <p><a href="${result}">${result}</a></p>
             `;
-        
-    
+
+
             scanner.clear();
             // Clears scanning instance
-    
+
             document.getElementById('reader').remove();
-            
-        
+
+
         }
-    
+
         function error(err) {
             console.error(err);
-            
+
         }
-    
+
+        const loggedin = document.getElementById("login")
+        const logout = document.querySelector(".logout")
+
+        loggedin.addEventListener("click", () => {
+            console.log("clicking")
+
+
+            console.log(logout)
+            logout.classList.toggle("logoutactive")
+        })
+
+
+        logout.addEventListener("click", () => {
+            window.location = "./index.html"
+        })
+
     </script>
 
 </body>
+
 </html>

@@ -27,12 +27,12 @@ userRouter.post("/signup",async(req,res)=>{
                 const newuser=new userModel({name:username,email,password:hash,role})
                 console.log(newuser)
                 await newuser.save();
-                res.send({msg:"new user has been registered"})
+                res.status(201).json({msg:"New user has been registered"})
             }
         })
         }
         else{
-            res.send({msg:"User Alearday exist"})
+            return res.status(400).json({ message: 'User already exists' });
        }
 
 
@@ -41,33 +41,66 @@ userRouter.post("/signup",async(req,res)=>{
     }
 })
 
-userRouter.post("/login",async(req,res)=>{
+ userRouter.post("/login",async(req,res)=>
+//  {
     
-    try {
-        const {email,password}=req.body;
-        const isuserpresent=await userModel.findOne({email});
+//     try {
+//         const {email,password}=req.body;
+//         const isuserpresent=await userModel.findOne({email});
  
-        if(!isuserpresent){
-            return res.send({msg:"user not present in db , please register first"});
-        }
-        const correctpassword= await bcrypt.compareSync(password,isuserpresent.password);
-        if(!correctpassword){
-            return res.send({msg:"invalid credentials"})
-        }
+//         if(!isuserpresent){
+//             return res.send({msg:"user not present in db , please register first"});
+//         }
+//         const correctpassword= await bcrypt.compareSync(password,isuserpresent.password);
+//         if(!correctpassword){
+//             return res.send({msg:"invalid credentials"})
+//         }
 
-        const token= await jwt.sign({email,userid:isuserpresent._id,role:isuserpresent.role},process.env.token_key,{expiresIn:"30m"})
-        const refreshtoken= await jwt.sign({email,userid:isuserpresent._id,role:isuserpresent.role},process.env.ref_token_key,{expiresIn:"1h"})
-        console.log(isuserpresent)
-        if(isuserpresent.role=="admin"){
-            res.json({msg:"Login successful",token,refreshtoken,role:"admin"})
-            return
-        }
-        res.json({msg:"Login successful",token,refreshtoken})
+//         const token= await jwt.sign({email,userid:isuserpresent._id,role:isuserpresent.role},process.env.token_key,{expiresIn:"30m"})
+//         const refreshtoken= await jwt.sign({email,userid:isuserpresent._id,role:isuserpresent.role},process.env.ref_token_key,{expiresIn:"1h"})
+//         console.log(isuserpresent)
+//         if(isuserpresent.role=="admin"){
+//             res.json({msg:"Login successful",token,refreshtoken,role:"admin"})
+//             return
+//         }
+//         res.json({msg:"Login successful",token,refreshtoken})
+//     } catch (error) {
+//         console.log(error)
+//         res.json({msg:"something went wrong",error})    
+//     } 
+// }
+
+{
+    try {
+      const { email, password } = req.body;
+  
+      // Find the user by email
+      const user = await userModel.findOne({ email });
+      if (!user) {
+        return res.status(401).json({ msg: 'Invalid username or password' });
+      }
+  
+      // Compare the password
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
+      if (!isPasswordMatch) {
+        return res.status(401).json({ msg: 'Invalid username or password' });
+      }
+  
+      // Create a JWT
+      const token = jwt.sign({ email,userid:user._id,role:user.role}, process.env.token_key, {
+        expiresIn: '10m'
+      });
+  
+      const refreshToken= jwt.sign({email,userid:user._id,role:user.role},process.env.ref_token_key,{
+          expiresIn:"7d"
+      })
+      console.log({token,refreshToken})
+      res.status(201).json({ token,refreshToken,name:user.name,role:user.role,msg:"Login Successfull" });
     } catch (error) {
-        console.log(error)
-        res.json({msg:"something went wrong",error})    
-    } 
-})
+      res.status(500).json({msg:error});
+    }
+  }
+)
 
 userRouter.get("/logout",authenticator,async(req,res)=>{
     try {
@@ -81,18 +114,36 @@ userRouter.get("/logout",authenticator,async(req,res)=>{
     }
 })
 
-userRouter.get("/getnewtoken",authenticator,async(req,res)=>{
-    const refreshToken=req.headers.authorization.split(" ")[1];
-    if(!refreshToken) res.send({msg:"plz login again"})
+userRouter.get("/newtoken",async(req,res)=>{
+    try {
+        const refreshtoken=req?.headers?.authorization?.split(" ")[1]
 
-    jwt.verify(refreshToken,process.env.ref_token_key,async(err,decoded)=>{
+        var decoded = jwt.verify(refreshtoken, process.env.ref_token_key);
         if(!decoded){
-            res.send({msg:"plz login again",error:err})
-        }else{
-            const token = await jwt.sign({email:decoded.email,userId:decoded.userId},process.env.token_key,{ expiresIn: "7d" });
-            res.send({msg:"Login Successfull and New token genrated successfully",Token:token})
+            res.json({msg:"refresh Token Expired,Plz login Again"})
         }
-    })
+
+        const {userid}=decoded
+        const user=await userModel.findById(userid)
+        
+        if(!user){
+            res.status(401).json({msg:"Unauthorized,Plz Sign Up"})
+        }
+
+        const token = jwt.sign({ email,userid:user._id,role:user.role}, process.env.token_key, {
+            expiresIn: '10m'
+          });
+      
+          const refreshToken= jwt.sign({email,userid:user._id,role:user.role},process.env.ref_token_key,{
+              expiresIn:"7d"
+          })
+        
+        res.status(200).json({token,refreshToken})
+
+    } catch (error) {
+        console.log("err in refreshng token",error)
+        res.status(401).json({msg:"Unauthorized,Plz Sign UP"})
+    }
 })
 
 

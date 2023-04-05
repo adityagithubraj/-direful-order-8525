@@ -10,7 +10,7 @@ fboauthRouter.get("/",(req,res)=>{
     
 })
 fboauthRouter.get("/fboauthlogin",(req,res)=>{
-    res.sendFile(path.join(__dirname,"Frontend/index.html"))
+    res.sendFile(path.join(__dirname,"../../Frontend/loggedin.html"))
     
 })
 

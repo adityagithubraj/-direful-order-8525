@@ -13,18 +13,20 @@ oauthRouter.get("/", (req, res) => {
 
 })
 
-// oauthRouter.get("/oauthlogin", (req, res) => {
+oauthRouter.get("/oauthlogin", (req, res) => {
 
-//   console.log("inOauthLogin")
+  // console.log("inOauthLogin")
 
-//   res.cookie("user", `${req.user.email}`)
-//   console.log(req.user.cookie)
+  // res.cookie("user", `${req.user.email}`)
+  // console.log(req.user.cookie)
 
-//   res.writeHead(301, { Location: "https://glowing-gumption-f9f45a.netlify.app/" });
-//   res.end();
+  res.sendFile(path.join(__dirname,"../../Frontend/loggedin.html"))
+
+  // res.writeHead(301, { Location: " /" });
+  // res.end();
 
 
-// })
+})
 
 oauthRouter.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', "email"] }));
@@ -35,9 +37,9 @@ oauthRouter.get('/auth/google/callback',
     // Successful authentication, redirect home.
     console.log(req.user)
 
-    res.writeHead(301, { Location: "https://qr-code-chimp.netlify.app/loggedin" });
-    res.end();
-    // res.redirect('http://localhost:4500/oauth/oauthlogin');
+    // res.sendFile(path.join(__dirname,"../../Frontend/loggedin.html"))
+    // res.end();
+    res.redirect('http://localhost:4500/oauth/oauthlogin');
   });
 
 

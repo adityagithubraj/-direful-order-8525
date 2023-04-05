@@ -13,7 +13,12 @@ sign_in_btn.addEventListener("click", (e) => {
 });
 
 
-const signupForm = document.querySelector("sign-up-form")
+const signupForm = document.querySelector(".sign-up-form")
+
+signupForm.addEventListener("submit",(e)=>{
+  e.preventDefault()
+  SignUp () 
+})
 
 const SignUp = () => {
   console.log("In Signup Function")
@@ -26,25 +31,32 @@ const SignUp = () => {
 
   
   console.log(payload)
-  fetch("https://backend-deploy-km65.onrender.com/user/signup", {
+  fetch("http://localhost:4500/user/signup", {
     method: "POST",
     headers: {
       "Content-type": "application/json"
     },
     body: JSON.stringify(payload)
   })
-    .then(res => res.json())
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+  .then(async(res)=>{return{status:res.status,res:await res.json()}})
+  .then((data)=>{
+      console.log(data)
+      alert(data.res.msg)
+  })
 }
 
-const logIn = () => {
+
+let signinForm=document.querySelector(".sign-in-form")
+
+signinForm.addEventListener("submit",(e)=>{
+  e.preventDefault()
+  console.log("logging in")
   const payload = {
     email: document.getElementById("email").value,
     password: document.getElementById("password").value
   }
 
-  fetch("https://backend-deploy-km65.onrender.com/user/login", {
+  fetch("http://localhost:4500/user/login", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -53,22 +65,58 @@ const logIn = () => {
     body: JSON.stringify(payload)
 
   })
-    .then(res => res.json())
-    .then(res => {
-      console.log(res)
-      alert(res.msg)
+  .then(async(res)=>{return{status:res.status,res:await res.json()}})
+  .then((data)=>{
+      if(data.status==201){
+          localStorage.setItem("token",data.res.token)
+          localStorage.setItem("refreshToken",data.res.refreshToken)
+          localStorage.setItem("name",data.res.name)
+          alert(data.res.msg)
 
-      // localStorage.setItem("token",res.token)
-      if (res.role == "admin") {
-        window.location = "./admin.html"
-
-      } else {
-        window.location = "./loggedin.html"
-
+          if(data.res.role=="admin"){
+            window.location="./admin.html"
+        }else{
+            window.location="./index.html"
+        }
       }
-    })
+  })
     .catch(err => console.log(err))
-}
+
+})
+
+// const logIn = () => {
+//   console.log("logging in")
+//   const payload = {
+//     email: document.getElementById("email").value,
+//     password: document.getElementById("password").value
+//   }
+
+//   fetch("http://localhost:4500/user/login", {
+//     method: "POST",
+//     headers: {
+//       "Content-type": "application/json",
+
+//     },
+//     body: JSON.stringify(payload)
+
+//   })
+//   .then(async(res)=>{return{status:res.status,res:await res.json()}})
+//   .then((data)=>{
+//       if(data.status==201){
+//           localStorage.setItem("token",data.res.token)
+//           localStorage.setItem("refreshToken",data.res.refreshToken)
+//           localStorage.setItem("name",data.res.name)
+//           alert(data.res.msg)
+
+//           if(data.res.role=="admin"){
+//             window.location="./admin.html"
+//         }else{
+//             window.location="./index.html"
+//         }
+//       }
+//   })
+//     .catch(err => console.log(err))
+// }
 
 
 // ........................Google Login.....................................
@@ -76,7 +124,7 @@ const logIn = () => {
 const google = document.getElementById("google")
 
 google.addEventListener("click", () => {
-  fetch("https://backend-deploy-km65.onrender.com/oauth/auth/google")
+  fetch("http://localhost:4500/oauth/auth/google")
     .then(async (res) => { return { status: res.status, res: await res.json() } })
     .then((data) => {
       if (data.status == 201) {
