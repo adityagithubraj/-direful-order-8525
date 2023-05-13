@@ -1,0 +1,275 @@
+:root {
+  --main-color: #FF1744
+}
+
+/*    ...............................................Navbar........................................................... */
+
+
+html {
+  /* font-size: 65%; */
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  margin: 0px;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0.3rem 4rem;
+  z-index: 10000;
+  background-color: #0cc0df;
+}
+
+.header .logo img {
+  width: 150px;
+  margin-top: 2px;
+}
+
+.header .navbar a {
+  display: inline-block;
+  padding: 0.8rem 1.4rem;
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.header .navbar a:hover {
+  background: var(--main-color);
+}
+
+#menu-btn {
+  font-size: 1.9rem;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 6rem;
+}
+
+.logo img {
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+#user_name {
+  display: none;
+}
+
+
+.header h3 {
+  font-size: 1.3rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+
+.header h3 span {
+  display: block;
+  margin-top: -8px;
+  color: black;
+  margin-left: 22px;
+  font-size: large;
+
+}
+
+
+@media (max-width: 1250px) {
+  html {
+    scroll-padding: 7rem;
+  }
+
+  .header{
+    padding: 0.5rem 1.8rem;
+  }
+}
+
+@media (max-width: 1070px) {
+
+  #menu-btn {
+    display: inline-block;
+  }
+
+  #menu-btn.fa-times {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  .header {
+    padding: 0.5rem 2rem;
+  }
+
+  .header .navbar {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    right: 0;
+    background: #000;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+
+  .header .navbar.active {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .header .navbar a {
+    display: block;
+    font-size: 2rem;
+  }
+
+
+}
+
+@media (max-width: 768px) {
+  .main-logo{
+    width: 14rem;
+  }
+}
+
+
+#logout {
+  display: none;
+}
+
+.log {
+  display: flex;
+  justify-content: space-between;
+  border: 0px solid red;
+  width: 10%;
+}
+
+#name {
+  color: white;
+  font-family: sans-serif;
+  font-weight: 500;
+}
+
+#logout_btn {
+  background-color: white;
+  padding: 5px 8px 5px 8px;
+  border-radius: 20px;
+  font-size: 15px;
+  border: 1px solid #0cc0df;
+  font-weight: 500;
+}
+
+#logout_btn:hover {
+  cursor: pointer;
+  color: #0cc0df;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.active_log {
+  display: block;
+  border: 1px solid red;
+}
+
+body {
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 0px solid gray;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  background-color: #0cc0df;
+}
+
+#signin {
+  background-color: white;
+  padding: 5px 10px 5px 10px;
+  border-radius: 20px;
+  font-size: 17px;
+  color: #0cc0df;
+  border: 1px solid #0cc0df;
+  font-weight: 500;
+}
+
+#signin:hover {
+  cursor: pointer;
+  color: #0cc0df;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+#signup {
+  background-color: #0cc0df;
+  border: 0px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 20px;
+  font-size: 17px;
+  color: white;
+  font-weight: 500;
+}
+
+#signup:hover {
+  cursor: pointer;
+  background-color: #0cc0df;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border: 1px solid white;
+}
+
+#navbar p:hover {
+  cursor: pointer;
+  /* text-decoration: line-through; */
+  /* font-weight: 700; */
+  color: #ffffff;
+}
+
+#nav-left {
+  display: flex;
+  border: 0px solid red;
+  width: 75%;
+  color: white;
+}
+
+#logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 0px solid green;
+  width: 40%;
+}
+
+#logo img {
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+#menu {
+  display: flex;
+  justify-content: space-around;
+  border: 0px solid blue;
+  width: 80%;
+  align-items: center;
+}

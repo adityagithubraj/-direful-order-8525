@@ -1,4 +1,4 @@
-const url = "http://localhost:4500/admin"
+const url = "https://red-filthy-dove.cyclic.app/admin"
 
 displayUsers(`${url}/userlist`)
 

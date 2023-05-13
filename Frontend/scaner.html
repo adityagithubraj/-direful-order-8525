@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>qr code scanner</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/scanner.css">
     <script src="https://kit.fontawesome.com/d68d319f71.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="./Images/qrlogo2.webp" />
@@ -16,40 +16,35 @@
 </head>
 
 <body>
-    <div id="navbar">
+    <header class="header">
 
-        <div id="nav-left">
-            <div id="logo">
-                <img width="40%" src="./Images/qrlogo.png" alt="">
-            </div>
-            <div id="menu">
-                <a href="./qrurl.html">
-                    <p>Create URL Qr-Code <i class="fa-solid fa-chevron-down"></i></p>
-                </a>
-                <!-- <p>Quick Actions <i class="fa-solid fa-chevron-down"></i></p>
-                <p>Template <i class="fa-solid fa-chevron-down"></i></p>
-                <p>Mobile App <i class="fa-solid fa-chevron-down"></i></p> -->
-                <a href="./qrtxt.html">
-                    <p>Create Text Code<i class="fa-solid fa-chevron-down"></i></p>
-                </a>
-                <a href="./scaner.html">
-                    <p>Scan Qr-Code<i class="fa-solid fa-chevron-down"></i></p>
-                </a>
+        <a href="../index.html" class="logo"> <img style="width: 3.8rem;" src="./Images/qrlogo2.webp" alt="">
+          <h3><p>QRcode </p> <span >chimp</span></h3>
+        </a>
+    
+        <div id="menu-btn" class="fas fa-bars"></div>
+    
+        <nav class="navbar">
+    
+          <a href="./qrurl.html">
+            Create URL Qr-Code
+          </a>
+          <a href="./qrtxt.html">
+            Create Text Code
+          </a>
+          <a href="./scaner.html">
+            Scan Qr-Code
+          </a>
+          <a id="user_name">User</a>
+          <a href="" onclick="logoutFun()" id="logout">Log out</a>
+        </nav>
+        </nav>
+    
+      </header>
+    <!-- ......................................................................................................................................................... -->
 
-            </div>
-        </div>
-
-        <div id="nav-right">
-            <a style="position: relative;"><button id="login">User</button><button class="logout">Log
-                    Out</button></a>
-        </div>
-        <div id="logout" class="log">
-            <p id="name"></p>
-            <button id="logout_btn">Logout</button>
-        </div>
-    </div>
-    <div style=" margin-left: 45%;margin-right: 30%;width: 10%;height: 10%; margin-top: 10%;">
-        <img style="width:100% ;height: 100%;" src="./Images/qrlogo2.webp" alt="">
+    <div style="text-align: center;margin-top: 80px;">
+        <img class="main-logo" src="./Images/qrlogo2.webp" alt="">
     </div>
     <style>
         main {
@@ -67,43 +62,6 @@
             font-size: 1.5rem;
         }
 
-        #login {
-            background-color: white;
-            padding: 5px 10px 5px 10px;
-            border-radius: 20px;
-            font-size: 17px;
-            color: #0cc0df;
-            border: 1px solid #0cc0df;
-            font-weight: 500;
-            left: 0;
-            top: 25px;
-            cursor: pointer;
-        }
-
-        .logout {
-            background-color: white;
-            padding: 5px 10px 5px 10px;
-            border-radius: 20px;
-            font-size: 17px;
-            color: #0cc0df;
-            border: 1px solid #0cc0df;
-            font-weight: 500;
-            position: absolute;
-            left: 0;
-            top: 25px;
-            display: none;
-        }
-
-        .logoutactive {
-            display: block;
-        }
-
-
-        .logout:hover {
-            background-color: red;
-            color: white;
-            cursor: pointer;
-        }
     </style>
 
     <main>
@@ -148,22 +106,61 @@
 
         }
 
-        const loggedin = document.getElementById("login")
-        const logout = document.querySelector(".logout")
-
-        loggedin.addEventListener("click", () => {
-            console.log("clicking")
 
 
-            console.log(logout)
-            logout.classList.toggle("logoutactive")
-        })
+        
+
+// .......................................Navbar........................................................
 
 
-        logout.addEventListener("click", () => {
-            window.location = "./index.html"
-        })
+let menu = document.querySelector('#menu-btn');
+let navbar = document.querySelector('.header .navbar');
 
+menu.onclick = () => {
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+};
+
+window.onscroll = () => {
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+};
+
+// ............................................................................................................
+
+    let user=document.getElementById("user_name")
+    const logout = document.querySelector("#logout")
+
+
+    let token = localStorage.getItem("token")
+    let refreshToken = localStorage.getItem("refreshToken")
+    let name = localStorage.getItem("name")
+
+    CheckLoggedIn()
+
+    function CheckLoggedIn() {
+        if(token && refreshToken && name){
+            user.style.display="inline-block"
+            user.innerText=name
+            logout.style.display="inline-block"
+        }else{
+            user.style.display="none"
+            logout.style.display="none"
+        }
+
+    }
+
+
+// ........................................Logout Function..................................................
+
+function logoutFun(){
+    // localStorage.clear()
+    window.location.href="../index.html"
+}
+
+
+
+    
     </script>
 
 </body>

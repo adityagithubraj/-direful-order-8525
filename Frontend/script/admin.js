@@ -29,7 +29,7 @@ function SignOut(){
   var result=confirm("Do you really want to Sign Out!")
   if(result==true){
     localStorage.clear()
-      window.location="./index.html"
+      window.location=".././index.html"
   }
     
 }

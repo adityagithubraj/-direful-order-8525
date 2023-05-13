@@ -1,15 +1,153 @@
-.active {
+/* .active {
+  display: none;
+} */
+
+:root {
+  --main-color: #FF1744
+}
+
+/*    ...............................................Navbar........................................................... */
+
+
+html {
+  font-size: 65%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0rem 6rem;
+  z-index: 10000;
+  background-color: #0cc0df;
+}
+
+.header .logo img {
+  width: 150px;
+  margin-top: 2px;
+}
+
+.header .navbar a {
+  display: inline-block;
+  padding: 1.5rem 2rem;
+  font-size: 1.7rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.header .navbar a:hover {
+  background: var(--main-color);
+}
+
+#menu-btn {
+  font-size: 3rem;
+  color: #fff;
+  cursor: pointer;
   display: none;
 }
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 10rem;
+}
+
+.logo img {
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+#user_name {
+  display: none;
+}
+
+
+.header h3 {
+  font-size: 1.7rem;
+  color: #fff;
+}
+
+@media (max-width: 1250px) {
+  html {
+    font-size: 58%;
+    scroll-padding: 7rem;
+  }
+
+  .header {
+    padding: 0rem 2rem;
+  }
+
+
+
+}
+
+@media (max-width: 908px) {
+
+  #menu-btn {
+    display: inline-block;
+  }
+
+  #menu-btn.fa-times {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  .header {
+    padding: 0rem 2rem;
+  }
+
+  .header .navbar {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    right: 0;
+    background: #000;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+
+  .header .navbar.active {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .header .navbar a {
+    display: block;
+    font-size: 2rem;
+  }
+
+
+}
+
+@media (max-width: 450px) {}
+
+
 #logout {
   display: none;
 }
+
 .log {
   display: flex;
   justify-content: space-between;
   border: 0px solid red;
   width: 10%;
 }
+
 #name {
   color: white;
   font-family: sans-serif;
@@ -24,15 +162,17 @@
   border: 1px solid #0cc0df;
   font-weight: 500;
 }
+
 #logout_btn:hover {
   cursor: pointer;
   color: #0cc0df;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
+
 .active_log {
   display: block;
-  border: 1px solid red;
+  
 }
 
 body {
@@ -41,9 +181,9 @@ body {
 }
 
 #navbar {
-    position: fixed;
-    top:0;
-    width: 100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -61,12 +201,14 @@ body {
   border: 1px solid #0cc0df;
   font-weight: 500;
 }
+
 #signin:hover {
   cursor: pointer;
   color: #0cc0df;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
+
 #signup {
   background-color: #0cc0df;
   border: 0px;
@@ -76,6 +218,7 @@ body {
   color: white;
   font-weight: 500;
 }
+
 #signup:hover {
   cursor: pointer;
   background-color: #0cc0df;
@@ -123,43 +266,46 @@ body {
   color: #ffffff;
   font-family: sans-serif;
   font-weight: 500;
-  font-size:17px;
+  font-size: 17px;
 }
 
 #div1 {
-
   display: flex;
-  margin-left: 10%;
-  margin-right: 10%;
+  padding: 2rem 3rem;
   margin-top: 50px;
   border: 0px solid red;
   align-items: center;
-  justify-content: space-around;
-  margin-top:50px;
+  justify-content: center;
+  margin-top: 50px;
 }
+
 #div1 h1 {
   color: #242424;
-
   font-weight: 800;
-  font-size: 55px;
+  font-size: 4.5rem;
 }
+
 #div1 p {
   color: #242424;
   font-weight: 400;
   font-size: 18px;
   line-height: 30px;
 }
+
 #d1r {
-  width: 45%;
-  border: 0px solid red;
+  width: 40%;
+  margin-left: 5rem;
 }
+
 #d1r img {
   width: 100%;
 }
+
 #d1l {
   width: 45%;
   border: 0px solid red;
 }
+
 #d1l button {
   margin-top: 30px;
   background-color: #0cc0df;
@@ -214,10 +360,12 @@ body {
   background-color: white;
   border-radius: 15px;
 }
+
 #process div span i {
   font-size: 40px;
   margin: 20px;
 }
+
 #process h3 {
   font-family: sans-serif;
   color: #242424;
@@ -225,16 +373,18 @@ body {
   line-height: 26px;
   font-weight: 800;
 }
+
 #process p {
   color: #242424;
   line-height: 21px;
   font-family: sans-serif;
 }
+
 /* #img{
-    width: 50%;
-    margin-top: 20px;
-    margin-right: 0px;
-    padding-right: 0px;
+width: 50%;
+margin-top: 20px;
+margin-right: 0px;
+padding-right: 0px;
 } */
 .img1 {
   width: 50%;
@@ -242,6 +392,7 @@ body {
   margin-right: 0px;
   padding-right: 0px;
 }
+
 #process span {
   margin-right: 0px;
 }
@@ -268,6 +419,7 @@ body {
 #d3r {
   width: 40%;
 }
+
 #d3r h1 {
   font-family: sans-serif;
   font-weight: 800;
@@ -275,6 +427,7 @@ body {
   line-height: 49px;
   color: #242424;
 }
+
 #d3r p {
   font-family: sans-serif;
   font-weight: 400;
@@ -282,6 +435,7 @@ body {
   line-height: 24px;
   color: #242424;
 }
+
 #d3r button {
   margin-top: 30px;
   background-color: #0cc0df;
@@ -292,6 +446,7 @@ body {
   font-weight: 800;
   color: white;
 }
+
 #d3r button:hover {
   cursor: pointer;
   background-color: #00d9ff;
@@ -307,12 +462,14 @@ body {
   background: linear-gradient(to right, #0cc0df, #c168e6, #e767ce);
   font-family: sans-serif;
 }
+
 #div4 h2 {
   color: white;
   font-size: 36px;
   line-height: 45px;
   font-weight: 800;
 }
+
 #div4 button {
   background-color: white;
   border: 0px;
@@ -323,14 +480,17 @@ body {
   font-weight: 600;
   font-family: sans-serif;
 }
+
 #div4 button:hover {
   cursor: pointer;
   color: #242424;
 }
+
 #div5 {
   margin-top: 100px;
   margin-bottom: 70px;
 }
+
 #div5 h2 {
   font-family: sans-serif;
   font-size: 45px;
@@ -368,7 +528,7 @@ body {
 
 #d6r {
   width: 45%;
-  height:100%;
+  height: 100%;
   border: 0px solid green;
 }
 
@@ -378,6 +538,7 @@ body {
   line-height: 45px;
   font-weight: 800;
 }
+
 #d6r p {
   font-family: sans-serif;
   font-size: 18px;
@@ -413,6 +574,7 @@ body {
   gap: 30px;
   border: 0px solid red;
 }
+
 #ftop h2 {
   font-family: sans-serif;
   font-size: 16px;
@@ -428,6 +590,7 @@ body {
   line-height: 17px;
   font-weight: 500;
 }
+
 #ftop p a:hover {
   color: #625f5f;
 }
@@ -459,10 +622,12 @@ body {
   #menu {
     display: none;
   }
+
   #logo {
     flex-direction: column;
     border: 0px solid red;
   }
+
   #logo img {
     width: 40%;
     padding-left: 10%;
@@ -472,12 +637,20 @@ body {
     flex-direction: column;
     width: 80%;
     border: 0px solid red;
+    margin-left: auto;
+    margin-right: auto;
+   
   }
+
   #d1l {
     width: 100%;
+    text-align: center;
   }
+
   #d1r {
+    margin-top: 5rem;
     width: 100%;
+    text-align: center;
   }
 
   #div2 {
@@ -499,6 +672,7 @@ body {
   #d3l {
     width: 100%;
   }
+
   #d3r {
     width: 100%;
   }
@@ -530,6 +704,7 @@ body {
   #ftop p {
     display: none;
   }
+
   #ftop div {
     margin: 0px;
   }
@@ -548,6 +723,44 @@ body {
 }
 
 
-a{
+a {
   text-decoration: none;
+}
+
+#user {
+  background-color: white;
+  padding: 5px 10px 5px 10px;
+  border-radius: 20px;
+  font-size: 17px;
+  color: #0cc0df;
+  border: 1px solid #0cc0df;
+  font-weight: 500;
+  left: 0;
+  top: 25px;
+  cursor: pointer;
+}
+
+.logout {
+  background-color: white;
+  padding: 5px 10px 5px 10px;
+  border-radius: 20px;
+  font-size: 17px;
+  color: #0cc0df;
+  border: 1px solid #0cc0df;
+  font-weight: 500;
+  position: absolute;
+  left: 0;
+  top: 25px;
+  display: none;
+}
+
+.logoutactive {
+  display: block;
+}
+
+
+.logout:hover {
+  background-color: red;
+  color: white;
+  cursor: pointer;
 }

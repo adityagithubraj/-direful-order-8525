@@ -76,3 +76,56 @@ const createSaveBtn = (saveUrl) => {
 hideSpinner();
 
 form.addEventListener('submit', onGenerateSubmit);
+
+
+
+// .......................................Navbar........................................................
+
+
+let menu = document.querySelector('#menu-btn');
+let navbar = document.querySelector('.header .navbar');
+
+menu.onclick = () => {
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+};
+
+window.onscroll = () => {
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+};
+
+// ............................................................................................................
+
+    let user=document.getElementById("user_name")
+    const logout = document.querySelector("#logout")
+
+
+
+    let token = localStorage.getItem("token")
+    let refreshToken = localStorage.getItem("refreshToken")
+    let name = localStorage.getItem("name")
+
+    CheckLoggedIn()
+
+    function CheckLoggedIn() {
+        if(token && refreshToken && name){
+            user.style.display="inline-block"
+            user.innerText=name
+            logout.style.display="inline-block"
+        }else{
+            user.style.display="none"
+            logout.style.display="none"
+        }
+
+    }
+
+
+// ........................................Logout Function..................................................
+
+function logoutFun(){
+    localStorage.clear()
+    window.location.href="../index.html"
+}
+
+
