@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --main-color: #FF1744
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            padding: 0 9%;
+            z-index: 10000;
+            background-color: #0cc0df;
+        }
+
+        .header .logo img {
+            width: 150px;
+            margin-top: 2px;
+        }
+
+        .header .navbar a {
+            display: inline-block;
+            padding: 1.5rem 2rem;
+            font-size: 1.7rem;
+            color: #fff;
+        }
+
+        .header .navbar a:hover {
+            background: var(--main-color);
+        }
+
+        #menu-btn {
+            font-size: 3rem;
+            color: #fff;
+            cursor: pointer;
+            display: none;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 10rem;
+        }
+
+        .logo img {
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+
+        
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+    scroll-padding: 7rem;
+  }
+
+  .header {
+    padding: 0 2rem;
+  }
+
+
+
+}
+
+@media (max-width: 768px) {
+
+ 
+
+  #menu-btn {
+    display: inline-block;
+  }
+
+  #menu-btn.fa-times {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  .header {
+    padding: 2rem;
+  }
+
+  .header .navbar {
+    position: absolute;
+    top: 99%;
+    left: 0;
+    right: 0;
+    background: #000;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+
+  .header .navbar.active {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .header .navbar a {
+    display: block;
+    font-size: 2rem;
+  }
+
+
+}
+
+@media (max-width: 450px) {
+  
+}
+
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+
+<body>
+    <header class="header">
+
+        <a href="#" class="logo"> <img style="width: 3.5rem;" src="./Images/qrlogo2.webp" alt="">
+            <h3>QRcode <br> <span style="color:black ;margin-left: 20px; font-size: large;">chimp</span></h3>
+        </a>
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+        <nav class="navbar">
+            <!-- <a href="#home">home</a> -->
+            <!-- <a href="#about">about</a> -->
+            <!-- <a href="#features">features</a> -->
+            <!-- <a href="#pricing">pricing</a> -->
+            <a href="./trainerAllClasses.html">All Classes</a>
+            <a href="./trainerDashboard.html" id="user_name">trainer's Dashboard</a>
+            <a href="./createClass.html">Create Fitness Class</a>
+            <a href="" onclick="logoutFun()">Log out</a>
+        </nav>
+        </nav>
+
+    </header>
+</body>
+<script>
+    // .......................................Navbar........................................................
+
+
+    let menu = document.querySelector('#menu-btn');
+    let navbar = document.querySelector('.header .navbar');
+
+    menu.onclick = () => {
+        menu.classList.toggle('fa-times');
+        navbar.classList.toggle('active');
+    };
+
+    window.onscroll = () => {
+        menu.classList.remove('fa-times');
+        navbar.classList.remove('active');
+    };
+
+</script>
+
+</html>
