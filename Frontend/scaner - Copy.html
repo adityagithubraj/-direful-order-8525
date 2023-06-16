@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>qr code scanner</title>
+    <link rel="stylesheet" href="./styles/scanner.css">
+    <script src="https://kit.fontawesome.com/d68d319f71.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./Images/qrlogo2.webp" />
+
+    <script src="/Frontend/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+</head>
+
+<body>
+    <header class="header">
+
+        <a href="../index.html" class="logo"> <img style="width: 3.8rem;" src="./Images/qrlogo2.webp" alt="">
+          <h3><p>QRcode </p> <span >chimp</span></h3>
+        </a>
+    
+        <div id="menu-btn" class="fas fa-bars"></div>
+    
+        <nav class="navbar">
+    
+          <a href="./qrurl.html">
+            Create URL Qr-Code
+          </a>
+          <a href="./qrtxt.html">
+            Create Text Code
+          </a>
+          <a href="./scaner.html">
+            Scan Qr-Code
+          </a>
+          <a id="user_name">User</a>
+          <a href="" onclick="logoutFun()" id="logout">Log out</a>
+        </nav>
+        </nav>
+    
+      </header>
+    <!-- ......................................................................................................................................................... -->
+
+    <div style="text-align: center;margin-top: 80px;">
+        <img class="main-logo" src="./Images/qrlogo2.webp" alt="">
+    </div>
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #reader {
+            width: 600px;
+        }
+
+        #result {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+    </style>
+
+    <main>
+        <div id="reader"></div>
+        <div id="result"></div>
+    </main>
+
+
+    <script>
+
+        const scanner = new Html5QrcodeScanner('reader', {
+
+            qrbox: {
+                width: 250,
+                height: 250,
+            },
+            fps: 20,
+        });
+
+
+        scanner.render(success, error);
+        // Starts scanner
+
+        function success(result) {
+
+            document.getElementById('result').innerHTML = `
+            <h2>Success!</h2>
+            <p><a href="${result}">${result}</a></p>
+            `;
+
+
+            scanner.clear();
+            // Clears scanning instance
+
+            document.getElementById('reader').remove();
+
+
+        }
+
+        function error(err) {
+            console.error(err);
+
+        }
+
+
+
+        
+
+// .......................................Navbar........................................................
+
+
+let menu = document.querySelector('#menu-btn');
+let navbar = document.querySelector('.header .navbar');
+
+menu.onclick = () => {
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('active');
+};
+
+window.onscroll = () => {
+    menu.classList.remove('fa-times');
+    navbar.classList.remove('active');
+};
+
+// ............................................................................................................
+
+    let user=document.getElementById("user_name")
+    const logout = document.querySelector("#logout")
+
+
+    let token = localStorage.getItem("token")
+    let refreshToken = localStorage.getItem("refreshToken")
+    let name = localStorage.getItem("name")
+
+    CheckLoggedIn()
+
+    function CheckLoggedIn() {
+        if(token && refreshToken && name){
+            user.style.display="inline-block"
+            user.innerText=name
+            logout.style.display="inline-block"
+        }else{
+            user.style.display="none"
+            logout.style.display="none"
+        }
+
+    }
+
+
+// ........................................Logout Function..................................................
+
+function logoutFun(){
+    // localStorage.clear()
+    window.location.href="../index.html"
+}
+
+
+
+    
+    </script>
+
+</body>
+
+</html>
