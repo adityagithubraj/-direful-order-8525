@@ -33,7 +33,7 @@ const SignUp = () => {
 
   console.log(payload)
   loader.style.display = "block"
-  fetch("https://red-filthy-dove.cyclic.app/user/signup", {
+  fetch("https://sore-cyan-cormorant-sock.cyclic.app/user/signup", {
     method: "POST",
     headers: {
       "Content-type": "application/json"
@@ -65,7 +65,7 @@ signinForm.addEventListener("submit", (e) => {
     password: document.getElementById("password").value
   }
   loader.style.display = "block"
-  fetch("https://red-filthy-dove.cyclic.app/user/login", {
+  fetch("https://sore-cyan-cormorant-sock.cyclic.app/user/login", {
     method: "POST",
     headers: {
       "Content-type": "application/json",

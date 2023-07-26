@@ -1,4 +1,4 @@
-const url = "https://red-filthy-dove.cyclic.app/admin"
+const url = "https://sore-cyan-cormorant-sock.cyclic.app/admin"
 
 displayUsers(`${url}/userlist`)
 
